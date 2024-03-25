@@ -33,33 +33,33 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="02_cadastro_cliente.html" class="sidebar-link">
+                    <a href="cadastro_cliente.html" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Cadastro Cliente</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="03_cadastro_pet.html" class="sidebar-link">
+                    <a href="cadastro_pet.html" class="sidebar-link">
                         <i class="lni lni-bug"></i>
                         <span>Cadastro Pet</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="04_produto.html" class="sidebar-link">
+                    <a href="produto.html" class="sidebar-link">
                         <i class="lni lni-cart"></i>
                         <span>Produto</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="05_servicos.html" class="sidebar-link">
+                    <a href="servicos.html" class="sidebar-link">
                         <i class="lni lni-delivery"></i>
                         <span>Serviços</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="06_fale_conosco.html" class="sidebar-link">
+                    <a href="fale_conosco.html" class="sidebar-link">
                         <i class="lni lni-whatsapp"></i>
-                        <span>Fale conosco</span>
+                        <span>Fale Conosco</span>
                     </a>
                 </li>
             </ul>
@@ -70,39 +70,55 @@
                     <img src="images/petshop.jpg" width="230" height="210" />
                 </h1>
                 <section class="container">
-                    <header>Cadastro Cliente</header>
+                    <header>Cadastro Pet</header>
 
-                    <form action="#" class="form" id="cliForm" onsubmit="return cancelaEnvio()">
+                    <form action="#" class="form" id="petForm" onsubmit="return cancelaEnvio()">
                         <div class="input-box">
-                            <input type="text" placeholder="Nome *" id="cliName" required />
+                            <input type="text" placeholder="Nome *" id="petNome" required />
                         </div>
 
                         <div class="input-box address">
                             <div class="column">
-                                <input type="text" placeholder="RG *" id="cliRg" required />
-                                <input type="text" placeholder="CPF *" id="cliCpf" required />
-                            </div>
-                            <div class="column">
-                                <input type="text" placeholder="Data Nasc *" id="cliDataNasc" required />
                                 <div class="select-box">
-                                    <select id="cliGenero" required>
-                                        <option value="" hidden>Gênero *</option>
-                                        <option>Masculino</option>
-                                        <option>Feminino</option>
+                                    <select required id="petTipo">
+                                        <option value="" hidden>Tipo *</option>
+                                        <option>Cachorro</option>
+                                        <option>Gato</option>
+                                        <option>Outro</option>
+                                    </select>
+                                </div>
+                                <div class="select-box">
+                                    <select required id="petRaca">
+                                        <option value="" hidden>Raça *</option>
+                                        <option>Poodle</option>
+                                        <option>Beagle</option>
+                                        <option>Chou-chou</option>
                                         <option>Outro</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="column">
+                                <input type="text" placeholder="Data Nasc *" id="petDataNasc" required />
+                                <div class="select-box">
+                                    <select required id="petPorte">
+                                        <option value="" hidden>Porte *</option>
+                                        <option>Pequeno</option>
+                                        <option>Médio</option>
+                                        <option>Grande</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="input-box">
-                            <input type="text" placeholder="Email *" id="cliEmail" required />
+                        <div class="select-box" style="margin-top: 35px;">
+                            <select required id="petTemp">
+                                <option value="" hidden>Temperamento *</option>
+                                <option>Calmo</option>
+                                <option>Normal</option>
+                                <option>Agitado</option>
+                                <option>Agressivo</option>
+                            </select>
                         </div>
-
-                        <div class="input-box">
-                            <input type="password" placeholder="Senha *" id="cliPassword" required />
-                        </div>
-                        <button class="btn btn-secondary" type="submit" onclick="cadastraCliente()">Salvar</button>
+                        <button class="btn btn-secondary" type="submit" onclick="cadastraPet()">Salvar</button>
                     </form>
                 </section>
             </div>
@@ -116,35 +132,32 @@
 
     <script>
         // Adiciona máscara nos campos correspondentes
-        $('#cliRg').mask('0000000000');
-        $('#cliCpf').mask('000.000.000-00');
-        $('#cliDataNasc').mask('00/00/0000');
+        $('#petDataNasc').mask('00/00/0000');
     </script>
 
     <script>
-        // Essa funcao simula o cadastramento de um cliente
-        function cadastraCliente() {
+        // Essa funcao simula o cadastramento de um pet
+        function cadastraPet() {
 
             let fields = new Array();
 
-            fields.push(document.getElementById("cliName"));
-            fields.push(document.getElementById("cliRg"));
-            fields.push(document.getElementById("cliCpf"));
-            fields.push(document.getElementById("cliDataNasc"));
-            fields.push(document.getElementById("cliGenero"));
-            fields.push(document.getElementById("cliEmail"));
-            fields.push(document.getElementById("cliPassword"));
+            fields.push(document.getElementById("petNome"));
+            fields.push(document.getElementById("petTipo"));
+            fields.push(document.getElementById("petRaca"));
+            fields.push(document.getElementById("petDataNasc"));
+            fields.push(document.getElementById("petPorte"));
+            fields.push(document.getElementById("petTemp"));
 
             if (isVazio(fields)) {
-                // TODO: chamar endpoint que cadastra novo Cliente
+                // TODO: chamar endpoint que cadastra novo Pet
 
                 // Uso do SweetAlert2
                 Swal.fire({
-                    title: "Novo Cliente",
-                    text: "Cliente cadastrado com sucesso!",
+                    title: "Novo Pet",
+                    text: "Pet cadastrado com sucesso!",
                     icon: "success"
                 }).then(function () {
-                    document.getElementById("cliForm").reset();
+                    document.getElementById("petForm").reset();
                 });
             }
         }
