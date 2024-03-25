@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Shop</title>
+    <link href='https://fonts.googleapis.com/css?family=Baloo 2' rel='stylesheet'>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/carrousel.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="#">Menu</a>
+                </div>
+            </div>
+            <!-- Menu lateral - lista dos itens que compoem o menu -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="01_home.html" class="sidebar-link">
+                        <i class="lni lni-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="02_cadastro_cliente.html" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Cadastro Cliente</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="03_cadastro_pet.html" class="sidebar-link">
+                        <i class="lni lni-bug"></i>
+                        <span>Cadastro Pet</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="04_produto.html" class="sidebar-link">
+                        <i class="lni lni-cart"></i>
+                        <span>Produto</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="05_servicos.html" class="sidebar-link">
+                        <i class="lni lni-delivery"></i>
+                        <span>Serviços</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="06_fale_conosco.html" class="sidebar-link">
+                        <i class="lni lni-whatsapp"></i>
+                        <span>Fale conosco</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <div class="main">
+            <div>
+                <h1>
+                    <img src="images/petshop.jpg" width="230" height="210" />
+                </h1>
+                <section class="container">
+                    <header>Cadastro Pet</header>
+
+                    <form action="#" class="form" id="petForm" onsubmit="return cancelaEnvio()">
+                        <div class="input-box">
+                            <input type="text" placeholder="Nome *" id="petNome" required />
+                        </div>
+
+                        <div class="input-box address">
+                            <div class="column">
+                                <div class="select-box">
+                                    <select required id="petTipo">
+                                        <option value="" hidden>Tipo *</option>
+                                        <option>Cachorro</option>
+                                        <option>Gato</option>
+                                        <option>Outro</option>
+                                    </select>
+                                </div>
+                                <div class="select-box">
+                                    <select required id="petRaca">
+                                        <option value="" hidden>Raça *</option>
+                                        <option>Poodle</option>
+                                        <option>Beagle</option>
+                                        <option>Chou-chou</option>
+                                        <option>Outro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <input type="text" placeholder="Data Nasc *" id="petDataNasc" required />
+                                <div class="select-box">
+                                    <select required id="petPorte">
+                                        <option value="" hidden>Porte *</option>
+                                        <option>Pequeno</option>
+                                        <option>Médio</option>
+                                        <option>Grande</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-box" style="margin-top: 35px;">
+                            <select required id="petTemp">
+                                <option value="" hidden>Temperamento *</option>
+                                <option>Calmo</option>
+                                <option>Normal</option>
+                                <option>Agitado</option>
+                                <option>Agressivo</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" type="submit" onclick="cadastraPet()">Salvar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        // Adiciona máscara nos campos correspondentes
+        $('#petDataNasc').mask('00/00/0000');
+    </script>
+
+    <script>
+        // Essa funcao simula o cadastramento de um pet
+        function cadastraPet() {
+
+            let fields = new Array();
+
+            fields.push(document.getElementById("petNome"));
+            fields.push(document.getElementById("petTipo"));
+            fields.push(document.getElementById("petRaca"));
+            fields.push(document.getElementById("petDataNasc"));
+            fields.push(document.getElementById("petPorte"));
+            fields.push(document.getElementById("petTemp"));
+
+            if (isVazio(fields)) {
+                // TODO: chamar endpoint que cadastra novo Pet
+
+                // Uso do SweetAlert2
+                Swal.fire({
+                    title: "Novo Pet",
+                    text: "Pet cadastrado com sucesso!",
+                    icon: "success"
+                }).then(function () {
+                    document.getElementById("petForm").reset();
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
