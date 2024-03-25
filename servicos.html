@@ -198,7 +198,9 @@
                     text: "Serviço agendado com sucesso!",
                     icon: "success"
                 }).then(function () {
-                    document.getElementById("serviceForm").reset();
+                    document.getElementById("serviceForm").reset();                    
+                    // Zerar o valor do servico no componente
+                    document.getElementById("valorTotal").innerHTML = 'R$ 0';
                 });
             }
         }
